@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import './constants.dart';
+
+import './current_weather/view/current_weather_screen.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -14,10 +17,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Open Weather App",
-      debugShowMaterialGrid: false,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
-        backgroundColor: backgroundColor,
+        scaffoldBackgroundColor: backgroundColor,
+        fontFamily: GoogleFonts.roboto().fontFamily,
       ),
       home: const WeatherApp(),
     );
@@ -29,8 +33,8 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
+    return const Scaffold(
+      body: CurrentWeatherScreen(),
     );
   }
 }
