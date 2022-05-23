@@ -29,10 +29,12 @@ environment:
 dependencies:
   bloc: ^8.0.3
   cupertino_icons: ^1.0.2
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
   flutter_svg: ^1.0.3
+  geolocator: ^8.2.1
   google_fonts: ^3.0.0
   http: ^0.13.4
   provider: ^6.0.3
