@@ -22,7 +22,7 @@ class ExtraData extends StatelessWidget {
       children: [
         Image.asset(
           image,
-          height: 30.0,
+          height: 24.0,
         ),
         const SizedBox(height: defaultPadding / 4),
         Text(
