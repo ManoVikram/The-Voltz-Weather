@@ -42,3 +42,6 @@ class WeatherApp extends StatelessWidget {
 void main(List<String> args) {
   runApp(const MyApp());
 }
+
+// Check this site for more details on the app architecture
+// - https://medium.com/flutter-community/flutter-essential-what-you-need-to-know-567ad25dcd8f

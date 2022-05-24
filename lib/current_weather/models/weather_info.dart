@@ -21,6 +21,29 @@ class WeatherInfo extends Equatable {
   final String mainWeather;
   final String weatherDescription;
 
+  factory WeatherInfo.fromJson(Map<String, dynamic> data) {
+    final temperature =
+        data["temp"] as int; // In Kelvin - should be converted to Celcius
+    final timestamp = data["dt"] as int; // UTC - Epoch
+    final wind = data["wind_speed"] as int; // m/s
+    final humidity = data["humidity"] as int; // %
+    final pressure = data["pressure"] as int; // hPa
+    final uvi = data["uvi"] as double; // UV Index
+    final mainWeather = data["weather"]["main"] as String;
+    final weatherDescription = data["weather"]["description"] as String;
+
+    return WeatherInfo(
+      temperature: temperature,
+      timestamp: timestamp,
+      wind: wind,
+      humidity: humidity,
+      pressure: pressure,
+      uvi: uvi,
+      mainWeather: mainWeather,
+      weatherDescription: weatherDescription,
+    );
+  }
+
   @override
   List<Object?> get props => [
         temperature,
