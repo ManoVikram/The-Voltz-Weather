@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 
-// import './temperature_text.dart';
+import './temperature_text.dart';
 
 class HourlyDataDetails extends StatelessWidget {
   const HourlyDataDetails({
@@ -35,16 +35,16 @@ class HourlyDataDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          /* TemperatureText(
+          TemperatureText(
             temperature: "$temperature",
             fontSize: 16.0,
-          ), */
-          Text(
+          ),
+          /* Text(
             "$temperature deg",
             style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
-          ),
+          ), */
           const SizedBox(height: defaultPadding / 2),
           Image.asset(
             image,

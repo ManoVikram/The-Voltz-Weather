@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TemperatureText extends StatelessWidget {
   const TemperatureText({
@@ -14,25 +15,26 @@ class TemperatureText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Text(
-          temperature,
-          style: TextStyle(
-            // fontSize: Theme.of(context).textTheme.headline1?.fontSize,
-            height: 1.0,
-            fontSize: fontSize,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const Positioned(
-          top: 0.0,
-          right: 0.0,
-          child: Text(
-            "o",
-            style: TextStyle(
-              color: Colors.white54,
-              fontSize: 28.0,
-              fontWeight: FontWeight.bold,
-            ),
+        Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                temperature,
+                style: TextStyle(
+                  // fontSize: Theme.of(context).textTheme.headline1?.fontSize,
+                  height: 1.0,
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SvgPicture.asset(
+                "assets/icons/DegreeCelcius.svg",
+                // height: 50.0,
+                height: fontSize / 3,
+              ),
+            ],
           ),
         ),
       ],

@@ -17,11 +17,13 @@ class WeatherAPIClient {
     final uri = Uri.parse(_apiURL);
     final response = await httpClient.get(uri);
 
-    if (response.statusCode == 200) {
+    if (response.statusCode != 200) {
       throw Exception("Error getting weather from API!");
     }
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
+
+    // print(json);
 
     final WeatherInfo currentWeatherInfo =
         WeatherInfo.fromJson(json["current"]);

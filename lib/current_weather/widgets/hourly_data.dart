@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../../constants.dart';
 
+import '../models/models.dart';
+
 import './hourly_data_details.dart';
 
 class HourlyData extends StatelessWidget {
   const HourlyData({
     Key? key,
+    required this.hourlyWeatherDetails,
   }) : super(key: key);
+
+  final HourlyWeatherInfo hourlyWeatherDetails;
 
   @override
   Widget build(BuildContext context) {

@@ -6,13 +6,17 @@ import '../../constants.dart';
 import './extra_data.dart';
 import './temperature_text.dart';
 
+import '../models/models.dart';
+
 class WeatherDetails extends StatelessWidget {
   const WeatherDetails({
     Key? key,
     required this.size,
+    required this.weatherDetails,
   }) : super(key: key);
 
   final Size size;
+  final WeatherInfo weatherDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +69,9 @@ class WeatherDetails extends StatelessWidget {
                 height: size.height * 0.28,
               ),
               const SizedBox(height: defaultPadding / 2),
-              const TemperatureText(temperature: "21"),
+              // const TemperatureText(temperature: "21"),
+              TemperatureText(
+                  temperature: weatherDetails.temperature.toStringAsFixed(1)),
               const Text(
                 "Rainy",
                 style: TextStyle(

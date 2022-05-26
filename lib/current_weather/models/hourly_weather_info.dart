@@ -1,37 +1,45 @@
 import 'package:equatable/equatable.dart';
 
-class HourlyWeatherInfo extends Equatable {
-  const HourlyWeatherInfo({
+class HourlyWeatherData {
+  const HourlyWeatherData({
     required this.hourlyTimestamp,
     required this.hourlyTemperature,
     required this.hourlyMainWeather,
     required this.hourlyWeatherDescription,
   });
 
-  final int hourlyTimestamp;
-  final int hourlyTemperature;
+  final num hourlyTimestamp;
+  final num hourlyTemperature;
   final String hourlyMainWeather;
   final String hourlyWeatherDescription;
+}
 
-  factory HourlyWeatherInfo.fromJson(Map<String, dynamic> data) {
-    final hourlyTimestamp = data["dt"] as int;
-    final hourlyTemperature = data["temp"] as int;
-    final hourlyMainWeather = data["weather"]["main"] as String;
-    final hourlyWeatherDescription = data["weather"]["description"] as String;
+class HourlyWeatherInfo extends Equatable {
+  const HourlyWeatherInfo({required this.hourlyWeatherInfo});
 
-    return HourlyWeatherInfo(
-      hourlyTimestamp: hourlyTimestamp,
-      hourlyTemperature: hourlyTemperature,
-      hourlyMainWeather: hourlyMainWeather,
-      hourlyWeatherDescription: hourlyWeatherDescription,
-    );
+  final List<HourlyWeatherData> hourlyWeatherInfo;
+
+  factory HourlyWeatherInfo.fromJson(List<dynamic> data) {
+    List<HourlyWeatherData> hourlyWeatherDataList = [];
+
+    for (var hourlyData in data) {
+      final hourlyTimestamp = hourlyData["dt"] as num;
+      final hourlyTemperature = hourlyData["temp"] as num;
+      final hourlyMainWeather = hourlyData["weather"][0]["main"] as String;
+      final hourlyWeatherDescription =
+          hourlyData["weather"][0]["description"] as String;
+
+      hourlyWeatherDataList.add(HourlyWeatherData(
+        hourlyTimestamp: hourlyTimestamp,
+        hourlyTemperature: hourlyTemperature - 273.15,
+        hourlyMainWeather: hourlyMainWeather,
+        hourlyWeatherDescription: hourlyWeatherDescription,
+      ));
+    }
+
+    return HourlyWeatherInfo(hourlyWeatherInfo: hourlyWeatherDataList);
   }
 
   @override
-  List<Object?> get props => [
-        hourlyTimestamp,
-        hourlyTemperature,
-        hourlyMainWeather,
-        hourlyWeatherDescription,
-      ];
+  List<Object?> get props => [hourlyWeatherInfo];
 }
