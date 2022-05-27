@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../constants.dart';
 
@@ -80,9 +81,10 @@ class WeatherDetails extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: defaultPadding / 3),
-              const Text(
-                "Monday, 23 May",
-                style: TextStyle(
+              Text(
+                // "Monday, 23 May",
+                DateFormat("EEEE, dd MMMM").format(weatherDetails.timestamp),
+                style: const TextStyle(
                   color: Colors.white60,
                   fontWeight: FontWeight.bold,
                 ),
@@ -105,21 +107,22 @@ class WeatherDetails extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
+                children: [
                   ExtraData(
-                    image: "assets/images/Cloudy_Thunder_Rain.png",
-                    text: "13 km/h",
+                    image: "assets/images/Wind.png",
+                    text: "${weatherDetails.wind} km/h",
                     type: "Wind",
                   ),
                   ExtraData(
-                    image: "assets/images/Moon.png",
-                    text: "13 km/h",
-                    type: "Wind",
+                    image: "assets/images/WaterDrop.png",
+                    text: "${weatherDetails.humidity}%",
+                    type: "Humidity",
                   ),
                   ExtraData(
-                    image: "assets/images/Thunder.png",
-                    text: "13 km/h",
-                    type: "Wind",
+                    image: "assets/images/Thermometer_Light.png",
+                    text:
+                        "${weatherDetails.feelsLikeTemperature.toStringAsFixed(1)} °C",
+                    type: "Feels Like",
                   ),
                 ],
               ),

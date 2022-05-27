@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 class WeatherInfo extends Equatable {
   const WeatherInfo({
     required this.temperature,
+    required this.feelsLikeTemperature,
     required this.timestamp,
     required this.wind,
     required this.humidity,
@@ -13,7 +14,8 @@ class WeatherInfo extends Equatable {
   });
 
   final num temperature;
-  final num timestamp;
+  final num feelsLikeTemperature;
+  final DateTime timestamp;
   final num wind;
   final num humidity;
   final num pressure;
@@ -24,6 +26,8 @@ class WeatherInfo extends Equatable {
   factory WeatherInfo.fromJson(Map<String, dynamic> data) {
     final temperature =
         data["temp"] as num; // In Kelvin - should be converted to Celcius
+    final feelsLikeTemperature =
+        data["feels_like"] as num; // In Kelvin - should be converted to Celcius
     final timestamp = data["dt"] as num; // UTC - Epoch
     final wind = data["wind_speed"] as num; // m/s
     final humidity = data["humidity"] as num; // %
@@ -34,7 +38,8 @@ class WeatherInfo extends Equatable {
 
     return WeatherInfo(
       temperature: temperature - 273.15,
-      timestamp: timestamp,
+      feelsLikeTemperature: feelsLikeTemperature - 273.15,
+      timestamp: DateTime.fromMillisecondsSinceEpoch(timestamp.toInt() * 1000),
       wind: wind,
       humidity: humidity,
       pressure: pressure,

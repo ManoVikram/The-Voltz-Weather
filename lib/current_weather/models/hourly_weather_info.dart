@@ -29,10 +29,6 @@ class HourlyWeatherInfo extends Equatable {
       final hourlyWeatherDescription =
           hourlyData["weather"][0]["description"] as String;
 
-      print(DateTime.fromMillisecondsSinceEpoch(
-        hourlyTimestamp.toInt() * 1000,
-      ));
-
       if (DateTime.now().day ==
           DateTime.fromMillisecondsSinceEpoch(hourlyTimestamp.toInt() * 1000)
               .day) {
