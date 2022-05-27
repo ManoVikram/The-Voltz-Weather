@@ -23,8 +23,6 @@ class WeatherAPIClient {
 
     final json = jsonDecode(response.body) as Map<String, dynamic>;
 
-    // print(json);
-
     final WeatherInfo currentWeatherInfo =
         WeatherInfo.fromJson(json["current"]);
     final HourlyWeatherInfo hourlyWeatherInfo =

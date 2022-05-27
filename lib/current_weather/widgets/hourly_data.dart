@@ -58,7 +58,23 @@ class HourlyData extends StatelessWidget {
             ],
           ),
           const SizedBox(height: defaultPadding),
-          SingleChildScrollView(
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: hourlyWeatherDetails.hourlyWeatherInfo.length,
+              itemBuilder: (context, index) => HourlyDataDetails(
+                temperature: hourlyWeatherDetails
+                    .hourlyWeatherInfo[index].hourlyTemperature
+                    .toInt(),
+                image: "assets/images/Cloudy.png",
+                time:
+                    "${hourlyWeatherDetails.hourlyWeatherInfo[index].hourlyTimestamp.hour}:00",
+              ),
+            ),
+          ),
+          /* SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -85,7 +101,7 @@ class HourlyData extends StatelessWidget {
                 ),
               ],
             ),
-          ),
+          ), */
         ],
       ),
     );
