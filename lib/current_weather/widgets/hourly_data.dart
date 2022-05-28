@@ -68,7 +68,9 @@ class HourlyData extends StatelessWidget {
                 temperature: hourlyWeatherDetails
                     .hourlyWeatherInfo[index].hourlyTemperature
                     .toInt(),
-                image: "assets/images/Cloudy.png",
+                // image: "assets/images/Cloudy.png",
+                image:
+                    hourlyWeatherDetails.hourlyWeatherInfo[index].weatherIcon,
                 time:
                     "${hourlyWeatherDetails.hourlyWeatherInfo[index].hourlyTimestamp.hour}:00",
               ),

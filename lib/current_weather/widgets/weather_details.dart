@@ -66,16 +66,18 @@ class WeatherDetails extends StatelessWidget {
                 ],
               ),
               Image.asset(
-                "assets/images/Sunny_Cloudy_Thunder_Rain_Extra.png",
+                // "assets/images/Sunny_Cloudy_Thunder_Rain_Extra.png",
+                weatherDetails.weatherIcon,
                 height: size.height * 0.28,
               ),
               const SizedBox(height: defaultPadding / 2),
               // const TemperatureText(temperature: "21"),
               TemperatureText(
                   temperature: weatherDetails.temperature.toStringAsFixed(1)),
-              const Text(
-                "Rainy",
-                style: TextStyle(
+              Text(
+                // "Rainy",
+                weatherDetails.mainWeather,
+                style: const TextStyle(
                   height: 0.75,
                   fontSize: 30.0,
                 ),

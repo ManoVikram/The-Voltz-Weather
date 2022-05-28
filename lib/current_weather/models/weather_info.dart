@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import './weather_icon.dart';
+
 class WeatherInfo extends Equatable {
   const WeatherInfo({
     required this.temperature,
@@ -11,6 +13,7 @@ class WeatherInfo extends Equatable {
     required this.uvi,
     required this.mainWeather,
     required this.weatherDescription,
+    required this.weatherIcon,
   });
 
   final num temperature;
@@ -22,6 +25,7 @@ class WeatherInfo extends Equatable {
   final num uvi;
   final String mainWeather;
   final String weatherDescription;
+  final String weatherIcon;
 
   factory WeatherInfo.fromJson(Map<String, dynamic> data) {
     final temperature =
@@ -36,6 +40,15 @@ class WeatherInfo extends Equatable {
     final mainWeather = data["weather"][0]["main"] as String;
     final weatherDescription = data["weather"][0]["description"] as String;
 
+    final DateTime time =
+        DateTime.fromMillisecondsSinceEpoch(timestamp.toInt() * 1000);
+
+    bool isDay = true;
+
+    if (!(time.hour > 6 && time.hour < 18)) {
+      isDay = false;
+    }
+
     return WeatherInfo(
       temperature: temperature - 273.15,
       feelsLikeTemperature: feelsLikeTemperature - 273.15,
@@ -46,6 +59,10 @@ class WeatherInfo extends Equatable {
       uvi: uvi,
       mainWeather: mainWeather,
       weatherDescription: weatherDescription,
+      weatherIcon: WeatherIcon.getWeatherIcon(
+        mainWeather: mainWeather,
+        isDay: isDay,
+      )!,
     );
   }
 
