@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import '../../constants.dart';
@@ -8,6 +9,7 @@ import './extra_data.dart';
 import './temperature_text.dart';
 
 import '../models/models.dart';
+import '../bloc/bloc.dart';
 
 class WeatherDetails extends StatelessWidget {
   const WeatherDetails({
@@ -49,19 +51,31 @@ class WeatherDetails extends StatelessWidget {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    CupertinoIcons.location_solid,
-                    color: Colors.white,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<WeatherBloc>(context)
+                          .add(const FetchWeather());
+                    },
+                    child: const Icon(CupertinoIcons.refresh),
                   ),
-                  Text(
-                    "India",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        CupertinoIcons.location_solid,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "India",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
