@@ -1,18 +1,28 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
+import '../data_providers/device_location_client.dart';
+import '../repositories/location_repository.dart';
 import '../models/models.dart';
 
+import '../../secrets.dart';
+
 class WeatherAPIClient {
-  // TODO: It's better to have the API ID in a secret place and fetch the latitude and longitude from the geolocator package
-  final _apiURL =
-      "https://api.openweathermap.org/data/2.5/onecall?lat=12.9165&lon=79.1325&appid=c936909e91c940e7873f7c6c47d5f7a8";
   final http.Client httpClient;
 
-  const WeatherAPIClient({required this.httpClient});
+  WeatherAPIClient({
+    required this.httpClient,
+  });
+
+  final LocationRepository locationRepository =
+      LocationRepository(deviceLocationClient: DeviceLocationClient());
 
   Future<Weather> fetchWeather() async {
+    final DeviceLocation location = await locationRepository.fetchLocation();
+
+    late final String _apiURL =
+        "https://api.openweathermap.org/data/2.5/onecall?lat=${location.latitude}&lon=${location.longitude}&appid=$openWeatherAPIKey";
+
     final uri = Uri.parse(_apiURL);
     final response = await httpClient.get(uri);
 
@@ -30,6 +40,7 @@ class WeatherAPIClient {
     return Weather(
       weatherInfo: currentWeatherInfo,
       hourlyWeatherInfo: hourlyWeatherInfo,
+      locationName: location.area,
     );
   }
 }

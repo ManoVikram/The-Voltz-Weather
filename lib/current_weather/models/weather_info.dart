@@ -37,7 +37,7 @@ class WeatherInfo extends Equatable {
     final humidity = data["humidity"] as num; // %
     final pressure = data["pressure"] as num; // hPa
     final uvi = data["uvi"] as num; // UV Index
-    final mainWeather = data["weather"][0]["main"] as String;
+    var mainWeather = data["weather"][0]["main"] as String;
     final weatherDescription = data["weather"][0]["description"] as String;
 
     final DateTime time =
@@ -47,6 +47,14 @@ class WeatherInfo extends Equatable {
 
     if (!(time.hour > 6 && time.hour < 18)) {
       isDay = false;
+    }
+
+    if (mainWeather == "Clouds") {
+      if (isDay) {
+        mainWeather = "Clear";
+      } else {
+        mainWeather = "Clear";
+      }
     }
 
     return WeatherInfo(

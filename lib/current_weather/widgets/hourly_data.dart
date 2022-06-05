@@ -30,7 +30,7 @@ class HourlyData extends StatelessWidget {
               Text(
                 "Today",
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 16.0,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -58,7 +58,8 @@ class HourlyData extends StatelessWidget {
             ],
           ),
           const SizedBox(height: defaultPadding),
-          Expanded(
+          SizedBox(
+            height: 90,
             child: ListView.builder(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(),

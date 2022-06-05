@@ -16,10 +16,12 @@ class WeatherDetails extends StatelessWidget {
     Key? key,
     required this.size,
     required this.weatherDetails,
+    required this.location,
   }) : super(key: key);
 
   final Size size;
   final WeatherInfo weatherDetails;
+  final String location;
 
   @override
   Widget build(BuildContext context) {
@@ -62,16 +64,16 @@ class WeatherDetails extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(
+                    children: [
+                      const Icon(
                         CupertinoIcons.location_solid,
                         color: Colors.white,
                       ),
                       Text(
-                        "India",
-                        style: TextStyle(
+                        location,
+                        style: const TextStyle(
                           color: Colors.white,
-                          fontSize: 20.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -80,16 +82,13 @@ class WeatherDetails extends StatelessWidget {
                 ],
               ),
               Image.asset(
-                // "assets/images/Sunny_Cloudy_Thunder_Rain_Extra.png",
                 weatherDetails.weatherIcon,
-                height: size.height * 0.28,
+                height: size.height * 0.26,
               ),
               const SizedBox(height: defaultPadding / 2),
-              // const TemperatureText(temperature: "21"),
               TemperatureText(
                   temperature: weatherDetails.temperature.toStringAsFixed(1)),
               Text(
-                // "Rainy",
                 weatherDetails.mainWeather,
                 style: const TextStyle(
                   height: 0.75,
@@ -98,7 +97,6 @@ class WeatherDetails extends StatelessWidget {
               ),
               const SizedBox(height: defaultPadding / 3),
               Text(
-                // "Monday, 23 May",
                 DateFormat("EEEE, dd MMMM").format(weatherDetails.timestamp),
                 style: const TextStyle(
                   color: Colors.white60,

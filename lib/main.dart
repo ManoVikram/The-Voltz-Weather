@@ -7,6 +7,7 @@ import './constants.dart';
 
 import './current_weather/view/current_weather_screen.dart';
 
+import './current_weather/data_providers/device_location_client.dart';
 import './current_weather/data_providers/weather_api_client.dart';
 import './current_weather/repositories/repositories.dart';
 import './current_weather/bloc/bloc.dart';
@@ -14,10 +15,12 @@ import './current_weather/bloc/bloc.dart';
 class MyApp extends StatefulWidget {
   const MyApp({
     Key? key,
-    required this.repository,
+    // required this.locationRepository,
+    required this.weatherRepository,
   }) : super(key: key);
 
-  final WeatherRepository repository;
+  // final LocationRepository locationRepository;
+  final WeatherRepository weatherRepository;
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -34,8 +37,17 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: backgroundColor,
         fontFamily: GoogleFonts.roboto().fontFamily,
       ),
-      home: BlocProvider(
-        create: (context) => WeatherBloc(repository: widget.repository),
+      home: MultiBlocProvider(
+        providers: [
+          // BlocProvider(
+          //   create: (context) =>
+          //       LocationBloc(repository: widget.locationRepository),
+          // ),
+          BlocProvider(
+            create: (context) =>
+                WeatherBloc(repository: widget.weatherRepository),
+          ),
+        ],
         child: const WeatherApp(),
       ),
     );
@@ -63,13 +75,18 @@ class WeatherBlocObserver extends BlocObserver {
 }
 
 void main(List<String> args) {
-  final WeatherRepository repository = WeatherRepository(
-    weatherAPIClient: WeatherAPIClient(httpClient: http.Client()),
+  final WeatherRepository weatherRepository = WeatherRepository(
+    weatherAPIClient: WeatherAPIClient(
+      httpClient: http.Client(),
+    ),
   );
 
   BlocOverrides.runZoned(
     () {
-      runApp(MyApp(repository: repository));
+      runApp(MyApp(
+        // locationRepository: locationRepository,
+        weatherRepository: weatherRepository,
+      ));
     },
     blocObserver: WeatherBlocObserver(),
   );

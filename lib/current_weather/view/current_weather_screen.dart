@@ -35,10 +35,11 @@ class CurrentWeatherScreen extends StatelessWidget {
           return Column(
             children: [
               Expanded(
-                flex: 7,
+                flex: 6,
                 child: WeatherDetails(
                   size: size,
                   weatherDetails: state.weather.weatherInfo,
+                  location: state.weather.locationName,
                 ),
               ),
               Expanded(

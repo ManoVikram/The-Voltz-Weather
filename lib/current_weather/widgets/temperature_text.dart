@@ -5,7 +5,7 @@ class TemperatureText extends StatelessWidget {
   const TemperatureText({
     Key? key,
     required this.temperature,
-    this.fontSize = 120.0,
+    this.fontSize = 110.0,
   }) : super(key: key);
 
   final String temperature;

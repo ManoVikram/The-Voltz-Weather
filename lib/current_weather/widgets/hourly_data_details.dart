@@ -30,34 +30,38 @@ class HourlyDataDetails extends StatelessWidget {
           color: Colors.white24,
           width: 1.0,
         ),
-        borderRadius: BorderRadius.circular(24.0),
+        borderRadius: BorderRadius.circular(20.0),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TemperatureText(
-            temperature: "$temperature",
-            fontSize: 16.0,
-          ),
-          /* Text(
-            "$temperature deg",
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            TemperatureText(
+              temperature: "$temperature",
+              fontSize: 12.0,
             ),
-          ), */
-          const SizedBox(height: defaultPadding / 2),
-          Image.asset(
-            image,
-            height: 30.0,
-          ),
-          const SizedBox(height: defaultPadding / 2),
-          Text(
-            time,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
+            /* Text(
+              "$temperature deg",
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ), */
+            const SizedBox(height: defaultPadding / 2),
+            Image.asset(
+              image,
+              height: 24.0,
             ),
-          ),
-        ],
+            const SizedBox(height: defaultPadding / 2),
+            Text(
+              time,
+              style: const TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
