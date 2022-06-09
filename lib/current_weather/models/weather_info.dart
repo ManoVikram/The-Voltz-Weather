@@ -49,13 +49,13 @@ class WeatherInfo extends Equatable {
       isDay = false;
     }
 
-    if (mainWeather == "Clouds") {
+    /* if (mainWeather == "Clouds") {
       if (isDay) {
         mainWeather = "Clear";
       } else {
         mainWeather = "Clear";
       }
-    }
+    } */
 
     return WeatherInfo(
       temperature: temperature - 273.15,

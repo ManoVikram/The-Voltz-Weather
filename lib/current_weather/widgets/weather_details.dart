@@ -55,12 +55,22 @@ class WeatherDetails extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
+                  /* GestureDetector(
                     onTap: () {
                       BlocProvider.of<WeatherBloc>(context)
                           .add(const FetchWeather());
                     },
                     child: const Icon(CupertinoIcons.refresh),
+                  ), */
+                  IconButton(
+                    onPressed: () {
+                      BlocProvider.of<WeatherBloc>(context)
+                          .add(const FetchWeather());
+                    },
+                    iconSize: 20.0,
+                    padding: const EdgeInsets.all(0.0),
+                    visualDensity: VisualDensity.adaptivePlatformDensity,
+                    icon: const Icon(CupertinoIcons.refresh),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -83,7 +93,7 @@ class WeatherDetails extends StatelessWidget {
               ),
               Image.asset(
                 weatherDetails.weatherIcon,
-                height: size.height * 0.26,
+                height: size.height * 0.25,
               ),
               const SizedBox(height: defaultPadding / 2),
               TemperatureText(
