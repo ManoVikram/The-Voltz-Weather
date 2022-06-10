@@ -16,15 +16,15 @@ class HourlyData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: defaultPadding / 2,
-        horizontal: defaultPadding * 2,
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: defaultPadding),
-          Row(
+    return Column(
+      children: [
+        const SizedBox(height: defaultPadding),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: defaultPadding / 2,
+            horizontal: defaultPadding * 2,
+          ),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text(
@@ -57,56 +57,66 @@ class HourlyData extends StatelessWidget {
               SizedBox.shrink(),
             ],
           ),
-          const SizedBox(height: defaultPadding),
-          SizedBox(
-            height: 90,
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: hourlyWeatherDetails.hourlyWeatherInfo.length,
-              itemBuilder: (context, index) => HourlyDataDetails(
-                temperature: hourlyWeatherDetails
-                    .hourlyWeatherInfo[index].hourlyTemperature
-                    .toInt(),
-                // image: "assets/images/Cloudy.png",
-                image:
-                    hourlyWeatherDetails.hourlyWeatherInfo[index].weatherIcon,
-                time:
-                    "${hourlyWeatherDetails.hourlyWeatherInfo[index].hourlyTimestamp.hour}:00",
-              ),
-            ),
-          ),
-          /* SingleChildScrollView(
+        ),
+        const SizedBox(height: defaultPadding),
+        SizedBox(
+          height: 90,
+          child: ListView.builder(
+            shrinkWrap: true,
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
-            child: Row(
-              children: const [
-                HourlyDataDetails(
-                  temperature: 13,
-                  image: "assets/images/Cloudy.png",
-                  time: "10:00",
-                ),
-                HourlyDataDetails(
-                  temperature: 21,
-                  image: "assets/images/Cloudy.png",
-                  time: "11:00",
-                ),
-                HourlyDataDetails(
-                  temperature: 23,
-                  image: "assets/images/Cloudy.png",
-                  time: "12:00",
-                ),
-                HourlyDataDetails(
-                  temperature: 31,
-                  image: "assets/images/Cloudy.png",
-                  time: "13:00",
-                ),
-              ],
-            ),
-          ), */
-        ],
-      ),
+            itemCount: hourlyWeatherDetails.hourlyWeatherInfo.length,
+            itemBuilder: (context, index) {
+              return Row(
+                children: [
+                  if (index == 0) const SizedBox(width: defaultPadding),
+                  HourlyDataDetails(
+                    temperature: hourlyWeatherDetails
+                        .hourlyWeatherInfo[index].hourlyTemperature
+                        .toInt(),
+                    // image: "assets/images/Cloudy.png",
+                    image: hourlyWeatherDetails
+                        .hourlyWeatherInfo[index].weatherIcon,
+                    time:
+                        "${hourlyWeatherDetails.hourlyWeatherInfo[index].hourlyTimestamp.hour}:00",
+                  ),
+                  if (index ==
+                      hourlyWeatherDetails.hourlyWeatherInfo.length - 1)
+                    const SizedBox(width: defaultPadding * 0.5),
+                ],
+              );
+            },
+          ),
+        ),
+        /* SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: const [
+              HourlyDataDetails(
+                temperature: 13,
+                image: "assets/images/Cloudy.png",
+                time: "10:00",
+              ),
+              HourlyDataDetails(
+                temperature: 21,
+                image: "assets/images/Cloudy.png",
+                time: "11:00",
+              ),
+              HourlyDataDetails(
+                temperature: 23,
+                image: "assets/images/Cloudy.png",
+                time: "12:00",
+              ),
+              HourlyDataDetails(
+                temperature: 31,
+                image: "assets/images/Cloudy.png",
+                time: "13:00",
+              ),
+            ],
+          ),
+        ), */
+      ],
     );
   }
 }
