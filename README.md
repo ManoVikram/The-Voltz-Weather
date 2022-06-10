@@ -5,3 +5,8 @@ looking for your current location's weather? the voltz weather App is there!
 
 ![Fast Weather Info]()
 ![Simple Design]()
+
+## Built with ❤️ by
+
+[@ManoVikram](https://www.github.com/ManoVikram)
+
